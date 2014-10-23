@@ -1,4 +1,13 @@
-# Slidebars
+# dojo-slidebars
+This is dojo port of [Adam Smith's](http://www.adchsm.me/) Slidebar plugin for Jquery.  It has a dependency on Dojo 1.8+.
+
+
+	require(['slidebars/slidebars','dojo/domReady!'],function(slidebars){
+		slidebars();
+	});
+
+
+# Original SlideBars Readme
 
 Slidebars is a jQuery framework for quickly and easily implementing app style off-canvas space into your website.
 

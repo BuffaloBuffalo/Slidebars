@@ -43,24 +43,27 @@
 		<div class="sb-slidebar sb-left sb-style-push">
 			<!-- Your left Slidebar content. -->
 			<p>Just a line of text to demonstrate the push effect.</p>
-		</div>
+		</div>	
 		
 		<div class="sb-slidebar sb-right sb-style-overlay">
 			<!-- Your right Slidebar content. -->
 			<p>Just a line of text to demonstrate the overlay effect.</p>
 		</div>
 				
-		<!-- jQuery -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript">
+		var dojoConfig ={
+			async:1,
+			packages:[
+				{name:'slidebars',location:'../../development'}
+			]
+		};
+		</script>
+		<script src="../bower_components/dojo/dojo.js"></script>
 		
-		<!-- Slidebars -->
-		<script src="slidebars/slidebars.js"></script>
 		<script>
-			(function($) {
-				$(document).ready(function() {
-					$.slidebars();
-				});
-			}) (jQuery);
+			require(['slidebars/slidebars','dojo/domReady!'],function(slidebars){
+				slidebars();
+			});
 		</script>
 	</body>
 </html>
