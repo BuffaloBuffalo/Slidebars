@@ -30,7 +30,7 @@ define(['dojo/_base/lang',
 	'dojo/NodeList-dom',
 	'dojo/NodeList-manipulate',
 	'dojo/NodeList-traverse',
-	'./NodeList-size'
+	'./NodeList-jquery-extensions'
 	],function(lang,domGeom,domStyle,on,query){
 	//workaround helper method for getting width of nodes with display:none;
 	var cssShow = { position: "absolute", visibility: "hidden", display: "block" };

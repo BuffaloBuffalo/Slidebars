@@ -2,9 +2,8 @@
 define(['dojo/_base/array',
 	'dojo/_base/lang',
 	'dojo/dom-class',
-	'dojo/dom-geometry',
 	'dojo/dom-style',
-	'dojo/NodeList'],function(array,lang,domClass,domGeom,domStyle,NodeList){
+	'dojo/NodeList'],function(array,lang,domClass,domStyle,NodeList){
 
 	lang.extend(NodeList,{
 		css:function(prop,value){

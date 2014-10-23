@@ -1,6 +1,12 @@
 # dojo-slidebars
 This is dojo port of [Adam Smith's](http://www.adchsm.me/) Slidebar plugin for Jquery.  It has a dependency on Dojo 1.8+.
 
+To run examples, dojo should be installed through bower:
+
+	$ bower install
+
+
+To use slidebars, simply include slidebars.css and require in the slidebars module, and run the resulting function.
 
 	require(['slidebars/slidebars','dojo/domReady!'],function(slidebars){
 		slidebars();
