@@ -25,13 +25,14 @@
 define(['dojo/_base/lang',
 	'dojo/dom-geometry',
 	'dojo/dom-style',
+	'dojo/has',
 	'dojo/on',
 	'dojo/query',
 	'dojo/NodeList-dom',
 	'dojo/NodeList-manipulate',
 	'dojo/NodeList-traverse',
 	'./NodeList-jquery-extensions'
-	],function(lang,domGeom,domStyle,on,query){
+	],function(lang,domGeom,domStyle,has,on,query){
 	//workaround helper method for getting width of nodes with display:none;
 	var cssShow = { position: "absolute", visibility: "hidden", display: "block" };
 	//returns an object with w/h/t/l properties
@@ -192,6 +193,7 @@ define(['dojo/_base/lang',
 
 		// Animate mixin.
 		function animate(object, amount, side) {
+			//debugger;
 			//TODO just fix users of this method to provide px
 			if((''+amount).indexOf('px')==-1){
 				amount = amount+'px';	
@@ -210,6 +212,7 @@ define(['dojo/_base/lang',
 			// Apply animation
 			if (animation === 'translate') {
 				selector.css('transform', 'translate(' + amount + ')'); // Apply the animation.
+				selector.css('-webkit-transform', 'translate(' + amount + ')');
 
 			} else if (animation === 'side') {		
 				if (amount[0] === '-'){
@@ -344,35 +347,34 @@ define(['dojo/_base/lang',
 		function eventHandler(event, selector) {
 			event.stopPropagation(); // Stop event bubbling.
 			event.preventDefault(); // Prevent default behaviour.
-			if (event.type === 'touchend') selector.off('click'); // If event type was touch, turn off clicks to prevent phantom clicks.
 		}
-		
+		var eventName = has('touch') ? 'touchend' : 'click';
 		// Toggle left Slidebar
-		query('.sb-toggle-left').on('touchend, click', function(event) {
+		query('.sb-toggle-left').on(eventName, function(event) {
 			eventHandler(event, query(this)); // Handle the event.
 			toggle('left'); // Toggle the left Slidbar.
 		});
 		
 		// Toggle right Slidebar
-		query('.sb-toggle-right').on('touchend, click', function(event) {
+		query('.sb-toggle-right').on(eventName, function(event) {
 			eventHandler(event, query(this)); // Handle the event.
 			toggle('right'); // Toggle the right Slidbar.
 		});
 		
 		// Open left Slidebar
-		query('.sb-open-left').on('touchend, click', function(event) {
+		query('.sb-open-left').on(eventName, function(event) {
 			eventHandler(event, query(this)); // Handle the event.
 			open('left'); // Open the left Slidebar.
 		});
 		
 		// Open right Slidebar
-		query('.sb-open-right').on('touchend, click', function(event) {
+		query('.sb-open-right').on(eventName, function(event) {
 			eventHandler(event, query(this)); // Handle the event.
 			open('right'); // Open the right Slidebar.
 		});
 		
 		// Close Slidebar
-		query('.sb-close').on('touchend, click', function(event) {
+		query('.sb-close').on(eventName, function(event) {
 			var tag = event.currentTarget.tagName;
 			if (tag==='A' || query('a',event.currentTarget).length > 0 ) { // Is a link or contains a link.
 				if ( event.type === 'click' ) { // Make sure the user wanted to follow the link.
@@ -387,7 +389,7 @@ define(['dojo/_base/lang',
 		});
 		
 		// Close Slidebar via site
-		$site.on('touchend, click', function(event) {
+		$site.on(eventName, function(event) {
 			if (settings.siteClose && (leftActive || rightActive)) { // If settings permit closing by site and left or right Slidebar is open.
 				eventHandler(event, query(this)); // Handle the event.
 				close(); // Close it.
